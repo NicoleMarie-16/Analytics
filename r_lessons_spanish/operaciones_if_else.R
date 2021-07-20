@@ -45,9 +45,9 @@ library(lubridate)
 15 >= 20 # Falso
 
 # Evaluar si un numero es menor o igual que otro
-15 =< 20 # Falso
-15 =< 15 # Cierto
-15 =< 20 # Cierto
+# 15 =< 20 # Falso
+# 15 =< 15 # Cierto
+# 15 =< 20 # Cierto
 
 # Evaluar si un valor está presente en un vector de valores
 "gato" %in% c("gato", "perro", "conejo") # Cierto
@@ -74,7 +74,7 @@ if (edad_nicole > edad_liann) {
 } # Esto te imprime el mensaje porque la comparacion evalua a Cierto
 
 if (edad_nicole < edad_liann) {
-  print("Nicole es mayor que Liann.")
+  print("Liann es mayor que Nicole.")
 } # Esto no hace nada porque la expresion evalua a Falso y no especificamos una accion alterna
 
 # Si la edad de Nicole es mayor que la edad de Liann, imprime que Nicole es mayor y si no, imprime que Liann es mauyor
