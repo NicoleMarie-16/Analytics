@@ -46,6 +46,7 @@ edad_en_dias(nombre = "Nicole", edad_en_anos = 25)
 
 # No siempre tienes que especificar los argumentos, luego de que esten en el orden correcto:
 edad_en_dias("Liann", 16)
+edad_en_dias(16, "Liann")
 
 # Para quedarte con la tabla que te dice el estatus de la funcion puedes correr:
 tabla_resultados <- edad_en_dias(nombre = "Nicole", edad_en_anos = 25)$tabla
@@ -86,8 +87,8 @@ edad_en_dias <- function(nombre = character(),
 }
  
 # Cuando no hay error tenemos los siguientes resultados
-resultados <- lapply(seq_along(tabla_prueba$nombre), function (x) edad_en_dias(nombre = tabla_prueba$nombre[[x]],
-                                                                               edad_en_anos = tabla_prueba$edad[[x]]))
+resultados <- lapply(seq_along(tabla_prueba$nombre), function (nombre) edad_en_dias(nombre = tabla_prueba$nombre[[nombre]],
+                                                                               edad_en_anos = tabla_prueba$edad[[nombre]]))
 
 tabla_final <- rbindlist(resultados)
 
@@ -98,6 +99,59 @@ resultados2 <- lapply(seq_along(tabla_error$nombre), function (x) edad_en_dias(n
 tabla_final2 <- rbindlist(resultados2)
 
 ### Load data ---------------------------------------------------------------------------------------------
+if(nrow(tabla_final[estatus == "EXITO"]) == nrow(tabla_final)){
+  print("Todos los calculos fueron exitosos utilizando la tabla_prueba.")
+}else{
+  print(paste0(nrow(tabla_final[estatus != "EXITO"]), " de los intentos con tabla_prueba fallaron."))
+}
 
+if(nrow(tabla_final2[estatus == "EXITO"]) == nrow(tabla_final2)){
+  print("Todos los calculos fueron exitosos utilizando la tabla_eror.")
+}else{
+  print(paste0(nrow(tabla_final2[estatus != "EXITO"]), " de los intentos con tabla_error fallaron."))
+}
+
+saludo <- function(nombre = character()){
+  tryCatch(
+    expr = {
+      if (is.character(nombre)){
+        print("Continuando el proceso.")
+        resultado <- paste0("Hola ", nombre, "!")
+        print(resultado)
+        return(resultado)
+      }else{
+        print("El argumento no es de clase character!")
+        stop("Error!")
+      }
+    }, error = function(e){
+      resultado <- paste0("No hay nadie con ese nombre!")
+      print(resultado)
+      return(resultado)
+    }
+  )
+}
+
+for (nombre in list(1, "Nicole", "Jorge", "Liann", "William", 12, 13, 14)){
+  saludo(nombre)
+}
+
+saludo <- function(nombre = character()){
+      if (is.character(nombre)){
+        print("Continuando el proceso.")
+        resultado <- paste0("Hola ", nombre, "!")
+        print(resultado)
+        return(resultado)
+      }else{
+        print("El argumento no es de clase character!")
+        stop("Error!")
+      }
+
+}
+
+for (nombre in list(1, "Nicole", "Jorge", "Liann", "William", 12, 13, 14)){
+  saludo(nombre)
+}
+
+lapply(list(1, "Nicole", "Jorge", "Liann", "William", 12, 13, 14), saludo)
 
 # Clean up environment ----------------------------------------------------------------------------------
