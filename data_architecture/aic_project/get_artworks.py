@@ -96,6 +96,7 @@ else:
     print("An error occurred while retrieving the artworks. The process errored out on page {page}. Will re-try getting the remainder of the data.".format(page=last_page))
     results = get_artworks(total_pages = total_pages, start = last_page)
 
+failed_pages = results[2]
 if failed_pages.empty:
     print("Successfully loaded all artworks!")
 else:
