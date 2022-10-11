@@ -34,6 +34,8 @@ for i in datasets:
     print(i)
 
 #TODO: Save list of wine datasets into database
+datasets = pd.DataFrame(data = datasets,
+               columns =['Datasets'])
 
 # Get one dataset
 data_to_get = datasets[2]
@@ -57,9 +59,6 @@ with zipfile.ZipFile("/Users/nicol/PycharmProjects/kaggleApiProject/data/wine_qu
     ),
         'r') as zip_ref:
     zip_ref.extractall("/Users/nicol/PycharmProjects/kaggleApiProject/data/wine_quality/")
-
-# List files in directory
-import os
 
 # Get the list of all files and directories
 path = "/Users/nicol/PycharmProjects/kaggleApiProject/data/wine_quality/"
